@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native'
 import { Metrics, ApplicationStyles } from '../../Themes/'
+import Colors from '../../Themes/Colors'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
@@ -15,5 +16,14 @@ export default StyleSheet.create({
   },
   centered: {
     alignItems: 'center'
+  },
+  sectionText: {
+    fontFamily: 'Zapfino',
+    fontWeight: '200',
+    fontSize: 42,
+    paddingVertical: Metrics.doubleBaseMargin,
+    color: Colors.snow,
+    marginVertical: Metrics.smallMargin,
+    textAlign: 'center'
   }
 })
