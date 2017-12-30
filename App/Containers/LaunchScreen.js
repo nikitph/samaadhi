@@ -16,6 +16,10 @@ const colors = {
 }
 
 export default class LaunchScreen extends Component {
+  static navigationOptions = {
+    header: null
+  };
+
   render () {
     return (
       <View style={styles.mainContainer}>
@@ -38,7 +42,7 @@ export default class LaunchScreen extends Component {
               label='Lets Breathe!'
               onPress={() => {
                 this.b1.success()
-                this.props.navigation.navigate('SignUpScreen')
+                this.props.navigation.navigate('BreathingScreen')
               }
             }
               ref={ref => (this.b1 = ref)}
