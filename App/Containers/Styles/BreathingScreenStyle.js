@@ -10,23 +10,39 @@ export default StyleSheet.create({
   },
 
   centered: {
-    flex: 0.9,
+    flex: 0.8,
     alignItems: 'center',
     justifyContent: 'center'
   },
 
-  buttonrow: {
+  buttonRow: {
     flex: 0.1,
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: Colors.fire
+    justifyContent: 'center'
 
+  },
+
+  section: {
+    flex: 0.1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+
+  },
+
+  sectionText: {
+    fontFamily: 'Zapfino',
+    fontWeight: '200',
+    fontSize: 12,
+    color: 'blue',
+    textAlign: 'center'
   },
 
   circle: {
     width: 100,
     height: 100,
     borderRadius: 100 / 2,
-    backgroundColor: 'red'
+    backgroundColor: 'rgba(186,218,238,0.8)'
   }
 })

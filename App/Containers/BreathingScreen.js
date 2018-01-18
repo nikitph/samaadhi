@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, View, Animated } from 'react-native'
+import { Text, View, Animated } from 'react-native'
 import { connect } from 'react-redux'
-import { Images, Colors } from '../Themes'
+import { Colors } from '../Themes'
 import Button from 'react-native-micro-animated-button'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -16,7 +16,10 @@ class BreathingScreen extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      fadeAnim: new Animated.Value(0)  // Initial value for opacity: 0
+      fadeAnim: new Animated.Value(0),  // Initial value for opacity: 0
+      anim: null,
+      showStart: true,
+      showStop: false
     }
   }
 
@@ -24,49 +27,77 @@ class BreathingScreen extends Component {
   }
 
   startAnimation () {
-    Animated.loop(Animated.sequence([
+    let anime = Animated.loop(Animated.sequence([
       Animated.timing(                  // Animate over time
-                                    this.state.fadeAnim,            // The animated value to drive
+        this.state.fadeAnim,            // The animated value to drive
         {
           toValue: 1,                   // Animate to opacity: 1 (opaque)
-          duration: 5000              // Make it take a while
+          duration: 4000              // Make it take a while
         }
-                                    ), Animated.timing(                  // Animate over time
-                                    this.state.fadeAnim,            // The animated value to drive
-                                      {
-                                        toValue: 0,                   // Animate to opacity: 1 (opaque)
-                                        duration: 5000              // Make it take a while
-                                      }
-                                    )])).start()
+      ), Animated.delay(6000),
+      Animated.timing(                  // Animate over time
+        this.state.fadeAnim,            // The animated value to drive
+        {
+          toValue: 0,                   // Animate to opacity: 1 (opaque)
+          duration: 8000              // Make it take a while
+        }
+      )]))
+    this.state.anim = anime
+    anime.start()
+    console.log(this.state.fadeAnim._valueTracker)
+  }
+
+  stopAnimation () {
+    this.state.anim.stop()
   }
 
   render () {
+    this.state.fadeAnim._value > 0.5 ? console.log('a') : console.log('b')
+
     return (
       <View style={styles.container}>
         <View style={styles.centered}>
           <Animated.View style={[styles.circle, { transform: [{
             scale: this.state.fadeAnim.interpolate({
               inputRange: [0, 1],
-              outputRange: [0.25, 1.8]  // 0 : 150, 0.5 : 75, 1 : 0
+              outputRange: [0.2, 2]  // 0 : 150, 0.5 : 75, 1 : 0
             })
           }]}]} />
+        </View>
+        <View style={styles.section} >
+          <Text style={styles.sectionText}>Inhale when the circle expands, hold when its still & exhale when it contracts</Text>
         </View>
         <View style={styles.buttonRow}>
           <Button
             bounce
             foregroundColor={Colors.snow}
-            backgroundColor={Colors.fire}
-            successColor={Colors.fire}
+            backgroundColor={'rgba(186,218,238,1)'}
+            successIconName='remove'
             maxWidth={150}
             style={{margin: 10}}
             label='Lets Breathe!'
             onPress={() => {
-              this.b1.success()
               this.startAnimation()
+              this.b1.success()
+              this.b2.reset()
             }
             }
             ref={ref => (this.b1 = ref)}
-            successIconName='check'
+          />
+          <Button
+            bounce
+            foregroundColor={Colors.snow}
+            backgroundColor={'rgba(186,218,238,1)'}
+            maxWidth={150}
+            style={{margin: 10}}
+            label='stop'
+            onPress={() => {
+              this.stopAnimation()
+              this.b1.reset()
+              this.b2.reset()
+            }
+            }
+            ref={ref => (this.b2 = ref)}
           />
         </View>
       </View>
