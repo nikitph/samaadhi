@@ -32,7 +32,7 @@ export default StyleSheet.create({
   },
 
   sectionText: {
-    fontFamily: 'Zapfino',
+    fontFamily: 'Avenir',
     fontWeight: '200',
     fontSize: 12,
     color: 'blue',

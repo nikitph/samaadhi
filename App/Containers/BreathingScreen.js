@@ -32,19 +32,20 @@ class BreathingScreen extends Component {
         this.state.fadeAnim,            // The animated value to drive
         {
           toValue: 1,                   // Animate to opacity: 1 (opaque)
-          duration: 4000              // Make it take a while
+          duration: 4000,              // Make it take a while
+          useNativeDriver: true
         }
       ), Animated.delay(6000),
       Animated.timing(                  // Animate over time
         this.state.fadeAnim,            // The animated value to drive
         {
           toValue: 0,                   // Animate to opacity: 1 (opaque)
-          duration: 8000              // Make it take a while
+          duration: 8000,              // Make it take a while
+          useNativeDriver: true
         }
       )]))
     this.state.anim = anime
     anime.start()
-    console.log(this.state.fadeAnim._valueTracker)
   }
 
   stopAnimation () {
@@ -52,8 +53,6 @@ class BreathingScreen extends Component {
   }
 
   render () {
-    this.state.fadeAnim._value > 0.5 ? console.log('a') : console.log('b')
-
     return (
       <View style={styles.container}>
         <View style={styles.centered}>
@@ -71,7 +70,7 @@ class BreathingScreen extends Component {
           <Button
             bounce
             foregroundColor={Colors.snow}
-            backgroundColor={'rgba(186,218,238,1)'}
+            backgroundColor={'#2196F3'}
             successIconName='remove'
             maxWidth={150}
             style={{margin: 10}}
@@ -87,7 +86,7 @@ class BreathingScreen extends Component {
           <Button
             bounce
             foregroundColor={Colors.snow}
-            backgroundColor={'rgba(186,218,238,1)'}
+            backgroundColor={'#2196F3'}
             maxWidth={150}
             style={{margin: 10}}
             label='stop'
